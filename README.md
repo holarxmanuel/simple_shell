@@ -1,2 +1,1 @@
-# simple_shell
-A repo for simple shell buisness
+Juet a repo for simple shell buisness
