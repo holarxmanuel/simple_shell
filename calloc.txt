@@ -1,12 +1,12 @@
 #include <stdlib.h>
 #include "shell.h"
 /**
- * calloc - concatenate two strings specially
- * @nmemb: number of elements
- * @size: type of elements
+ * _calloc - cnate tw strings specially
+ * @nmemb: er of elements
+ * @size: t of elements
  * Return: nothing
  */
-void *calloc(unsigned int nmemb, unsigned int size)
+void *_calloc(unsigned int nmemb, unsigned int size)
 {
 	void *p = NULL;
 	unsigned int i;

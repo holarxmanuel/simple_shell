@@ -1,11 +1,11 @@
 #include "shell.h"
 /**
- * updatepwd - change the OLDPWD env variable
- * @buf: poiter to old pwd
- * @myenv: copy of environmental variable
- * Return: the string inside PWD env variable
+ * _updatepwd - chae the OLDPWD env variable
+ * @buf: pointer to old p
+ * @myenv: copy of environtal variable
+ * Return: the string ins PWD env variable
  */
-void updatepwd(char *buf, char **myenv)
+void _updatepwd(char *buf, char **myenv)
 {
 	char *entirepwd;
 	char str[] = "PWD=";
@@ -28,8 +28,8 @@ void updatepwd(char *buf, char **myenv)
 	}
 	if (cont == 4)
 	{
-		myenvlen = strlen(myenv[i]);
-		buflen = strlen(entirepwd);
+		myenvlen = _strlen(myenv[i]);
+		buflen = _strlen(entirepwd);
 		if (buflen < myenvlen)
 		{
 			for (k = 0; entirepwd[k] != '\0'; k++)
@@ -39,7 +39,7 @@ void updatepwd(char *buf, char **myenv)
 		}
 		else
 		{
-			myenv[i] = realloc(myenv[i], myenvlen, buflen + 1);
+			myenv[i] = _realloc(myenv[i], myenvlen, buflen + 1);
 			for (k = 0; entirepwd[k] != '\0'; k++)
 				myenv[i][k] = entirepwd[k];
 		}
@@ -47,12 +47,12 @@ void updatepwd(char *buf, char **myenv)
 	free(entirepwd);
 }
 /**
- * updateoldpwd - change the OLDPWD env variable
- * @buf: pointer to old pwd
- * @myenv: copy of environmental variable
- * Return: the string inside PWD env variable
+ * _updateoldpwd - change OLDPWD env variable
+ * @buf: pointo old pwd
+ * @myenv: copf environmental variable
+ * Return: theside PWD env variable
  */
-void updateoldpwd(char *buf, char **myenv)
+void _updateoldpwd(char *buf, char **myenv)
 {
 	char *entirepwd;
 	char str[] = "OLDPWD=";
@@ -73,8 +73,8 @@ void updateoldpwd(char *buf, char **myenv)
 	}
 	if (cont == 7)
 	{
-		myenvlen = strlen(myenv[i]);
-		buflen = strlen(entirepwd);
+		myenvlen = _strlen(myenv[i]);
+		buflen = _strlen(entirepwd);
 		if (buflen < myenvlen)
 		{
 			for (k = 0; entirepwd[k] != '\0'; k++)
@@ -84,7 +84,7 @@ void updateoldpwd(char *buf, char **myenv)
 		}
 		else
 		{
-			myenv[i] = realloc(myenv[i], myenvlen, buflen + 1);
+			myenv[i] = _realloc(myenv[i], myenvlen, buflen + 1);
 			for (k = 0; entirepwd[k] != '\0'; k++)
 				myenv[i][k] = entirepwd[k];
 		}

@@ -1,11 +1,11 @@
 #include "shell.h"
 
 /**
- * semicolon - search if in the input there is a ";" or a ";;"
- * @line: complete inputs of user
- * @loop: number of actual loop
- * @argv: input argument
- * Return: 1 if find ";" or ";;" or 0 if not
+ * semicolon - searcn the input there is a ";" or a ";;"
+ * @line: coete input of user
+ * @loop: nur of actual loop
+ * @argv: int argument
+ * Return: 1  find ";" or ";;" or 0 if not
  */
 int semicolon(char *line, int loop, char **argv)
 {
@@ -16,7 +16,7 @@ int semicolon(char *line, int loop, char **argv)
 		if (line[0] == ';')
 		{
 			valid = 1;
-			write(STDERR_FILENO, argv[0], strlen(argv[0]));
+			write(STDERR_FILENO, argv[0], _strlen(argv[0]));
 			write(STDERR_FILENO, ": ", 2);
 			print_number(loop);
 			write(STDERR_FILENO, ": ", 2);
@@ -28,7 +28,7 @@ int semicolon(char *line, int loop, char **argv)
 		if (line[cont] == ';' && line[cont + 1] == ';')
 		{
 			valid = 1;
-			write(STDERR_FILENO, argv[0], strlen(argv[0]));
+			write(STDERR_FILENO, argv[0], _strlen(argv[0]));
 			write(STDERR_FILENO, ": ", 2);
 			print_number(loop);
 			write(STDERR_FILENO, ": ", 2);
@@ -42,11 +42,11 @@ int semicolon(char *line, int loop, char **argv)
 	return (valid);
 }
 /**
- *comments - remove commentaries
+ *_comments - remove commentaries
  *@line: input of user
  * Return: the new input
  */
-char *comments(char *line)
+char *_comments(char *line)
 {
 	int a = 0, c = 0, flag = 0;
 

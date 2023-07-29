@@ -1,10 +1,10 @@
 #include "shell.h"
 /**
- * atoi - gets sign and numbers in  string
+ * _atoi - gets sn and numbers of string
  * @s: array
- * Return: gets numbers with its sign
+ * Return: getsnumbers with its sign
  */
-int atoi(char *s)
+int _atoi(char *s)
 {
 	unsigned int cont1 = 0, a, b, c, num = 0, tam;
 	int aux2 = 1;
