@@ -44,7 +44,7 @@ int issetenv(char **p, char ***myenv, int *e, int loop, char *v[])
 	return (salida);
 }
 /**
- * _setenv - function to add or modify an environment variable
+ * setenv - function to add or modify an environment variable
  * environ ponts to an array of pointers to strings called the "environment"
  * @myenv: icpy of environmental
  * @loop: nmber of loops
@@ -82,7 +82,7 @@ void setenv(char **p, char ***myenv, int *e, int loop, char *v[])
 		}
 		else
 		{
-			(*myenv)[i] = _realloc((*myenv)[i], myenvlen, _strlen(entirenv));
+			(*myenv)[i] = realloc((*myenv)[i], myenvlen, strlen(entirenv));
 			for (k = 0; entirenv[k] != '\0'; k++)
 				(*myenv)[i][k] = entirenv[k];
 		} free(withequal), free(entirenv), *e = *e;
@@ -116,7 +116,7 @@ void setenvcreat(char ***myenv, int *e, char *entirenv)
 		for (k = 0; (*myenv)[i][k] != '\0'; k++)
 			new[i][k] = (*myenv)[i][k];
 	}
-	new[i] = _calloc(strlen(entirenv) + 1, sizeof(char));
+	new[i] = calloc(strlen(entirenv) + 1, sizeof(char));
 	for (k = 0; entirenv[k] != '\0'; k++)
 		new[i][k] = entirenv[k];
 	new[i + 1] = NULL;

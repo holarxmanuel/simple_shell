@@ -32,7 +32,7 @@ int ishelp(char **p, int loop, char *v[], char **m)
 	return (salida);
 }
 /**
- * help_builtin  help of builtin
+ * help_builtin -  help of builtin
  * @p: input poiner
  * @loop: counterof loops
  * @v: arguments n input
@@ -81,7 +81,7 @@ void help_builtin(char **p, int loop, char *v[], char **m)
 	}
 }
 /**
-* help- writesthe error
+* help - writesthe error
 * @p: input poiter
 * @loop: counte of loops
 * @v: argumentsin input

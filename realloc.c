@@ -1,10 +1,11 @@
 #include "shell.h"
 /**
- * realloc - chane the size and copy the content
- * @ptr: malloc ponter to reallocate
+ * realloc - change the size and copy the content
+ * @ptr: malloc pointer to reallocate
  * @old_size: old number of bytes
- * @new_size: new umber of Bytes
- * Return: nothing */
+ * @new_size: new number of Bytes
+ * Return: nothing
+ */
 void *realloc(char *ptr, unsigned int old_size, unsigned int new_size)
 {
 	char *p = NULL;

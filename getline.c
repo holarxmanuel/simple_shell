@@ -87,7 +87,7 @@ char  *getline(int *a, char **m, int e)
 /**
  * getlineav - fuction to read what the user writes
  * @a: pointer t loop counter
- * @e: length of 
+ * @e: length of
  * @m: copy of enironmental
  * @av: argumentsin input
  * Return: line i sucess otherwise NULL.

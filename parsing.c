@@ -44,7 +44,6 @@ char **parsing(char *line)
 		perror("No memory");
 		return (NULL);
 	}
-/*store the tokeartition inside **p */
 	token = strtoky(line, " \t\n");
 	if (!token)
 	{
@@ -62,12 +61,11 @@ char **parsing(char *line)
 			perror("No memory");
 			return (NULL);
 		}
-/*fill the pointer h the content of token*/
 		for (i = 0; i < length; i++)
 			p[j][i] = token[i];
 		length = 0;
 		j++;
-/*get the next eleme*/n
+/*get the next eleme*/
 		token = strtoky(NULL, " \t\n");
 	}
 	p[j] = NULL;

@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * _errorcd - writs the error
+ * errorcd - writs the error
  * @p: inputpointer
  * Return: nthing.
  */
@@ -16,7 +16,7 @@ void errorcd(char **p)
 	currentstatus(&a);
 }
 /**
- * _errorexit - wrtes the error
+ * errorexit - wrtes the error
  * @p: input pinter
  * Return: noting.
  */

@@ -1,6 +1,6 @@
 #include "shell.h"
 /**
- * _yesargv - shel form without filename at input
+ * yesargv - shel form without filename at input
  * @argv: argument in the input
  * @envp: environmnt variables
  */
