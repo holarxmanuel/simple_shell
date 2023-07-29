@@ -1,0 +1,49 @@
+"Manual Page for Simple_Shell - A Comprehensive Guide to Command Language Interpretation
+
+NAME
+Simple_Shell - Command language interpreter
+
+SYNOPSIS
+./hsh
+
+DESCRIPTION
+Simple_Shell is a command language interpreter that executes commands from standard input or files.
+
+INVOCATION
+An interactive shell starts without non-option arguments by running ./hsh. When started non-interactively, like running a shell script, the shell reads and executes the next command (e.g., echo "pwd" | ./hsh).
+
+COMMAND EXECUTION
+Simple_Shell first reads user input as arguments, then splits the line into tokens. The shell looks for executables in paths specified by the PATH environment variable, forks new processes, executes their code, prints the output, and exits the prompt.
+
+BUILT-IN COMMANDS
+Each built-in command is executed directly in the shell.
+- env: Display all environment variables.
+- cd [dir]: Change the current directory to dir; HOME is the default dir.
+- exit [status]: Terminate the shell process with Ctrl+D (EOF) or exit with status n.
+- help [pattern]: Display helpful information about built-in commands. If pattern is specified, help provides detailed help for matching commands.
+- pwd: Print the absolute pathname of the current working directory.
+- unsetenv [variable]: Remove an environment variable.
+
+ENVIRONMENT
+Some environment variables:
+- HOME: The home directory of the current user, the default argument for the cd built-in.
+- PATH: The search path for commands; a colon-separated list of directories where the shell looks for commands.
+- PWD: The absolute pathname for the current directory.
+- OLDPWD: The previous working directory set by the cd command.
+
+DELIMIT AND COMMENT COMMANDS
+Delimit commands are characters used to split the string; Comment commands allow comments to be handled.
+- ; (semicolon): Used as a command separator to run multiple commands on a single line.
+- # (command number): Allows lines beginning with # to be ignored as comments.
+
+FILES
+Several files containing functions and code for Simple_Shell operations.
+
+SEE ALSO
+chdir (2), close (2), execve (2), exit (3), fflush (3), fork (2), free (3), getcwd (3), getline (3), malloc (3), open (2), read (2), stat (2), signal (2), strtok (3), wait (2), waitpid (2), write (2).
+
+BUGS
+None identified yet.
+
+AUTHOR
+Written by Teminijesu and Ebenezer"

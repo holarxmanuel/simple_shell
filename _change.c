@@ -1,11 +1,11 @@
 #include "shell.h"
 /**
- * _updatepwd - change the OLDPWD env variable
+ * updatepwd - change the OLDPWD env variable
  * @buf: poiter to old pwd
  * @myenv: copy of environmental variable
  * Return: the string inside PWD env variable
  */
-void _updatepwd(char *buf, char **myenv)
+void updatepwd(char *buf, char **myenv)
 {
 	char *entirepwd;
 	char str[] = "PWD=";
@@ -28,8 +28,8 @@ void _updatepwd(char *buf, char **myenv)
 	}
 	if (cont == 4)
 	{
-		myenvlen = _strlen(myenv[i]);
-		buflen = _strlen(entirepwd);
+		myenvlen = strlen(myenv[i]);
+		buflen = strlen(entirepwd);
 		if (buflen < myenvlen)
 		{
 			for (k = 0; entirepwd[k] != '\0'; k++)
@@ -39,7 +39,7 @@ void _updatepwd(char *buf, char **myenv)
 		}
 		else
 		{
-			myenv[i] = _realloc(myenv[i], myenvlen, buflen + 1);
+			myenv[i] = realloc(myenv[i], myenvlen, buflen + 1);
 			for (k = 0; entirepwd[k] != '\0'; k++)
 				myenv[i][k] = entirepwd[k];
 		}
@@ -52,7 +52,7 @@ void _updatepwd(char *buf, char **myenv)
  * @myenv: copy of environmental variable
  * Return: the string inside PWD env variable
  */
-void _updateoldpwd(char *buf, char **myenv)
+void updateoldpwd(char *buf, char **myenv)
 {
 	char *entirepwd;
 	char str[] = "OLDPWD=";
@@ -73,8 +73,8 @@ void _updateoldpwd(char *buf, char **myenv)
 	}
 	if (cont == 7)
 	{
-		myenvlen = _strlen(myenv[i]);
-		buflen = _strlen(entirepwd);
+		myenvlen = strlen(myenv[i]);
+		buflen = strlen(entirepwd);
 		if (buflen < myenvlen)
 		{
 			for (k = 0; entirepwd[k] != '\0'; k++)
@@ -84,7 +84,7 @@ void _updateoldpwd(char *buf, char **myenv)
 		}
 		else
 		{
-			myenv[i] = _realloc(myenv[i], myenvlen, buflen + 1);
+			myenv[i] = realloc(myenv[i], myenvlen, buflen + 1);
 			for (k = 0; entirepwd[k] != '\0'; k++)
 				myenv[i][k] = entirepwd[k];
 		}

@@ -16,7 +16,7 @@ int semicolon(char *line, int loop, char **argv)
 		if (line[0] == ';')
 		{
 			valid = 1;
-			write(STDERR_FILENO, argv[0], _strlen(argv[0]));
+			write(STDERR_FILENO, argv[0], strlen(argv[0]));
 			write(STDERR_FILENO, ": ", 2);
 			print_number(loop);
 			write(STDERR_FILENO, ": ", 2);
@@ -28,7 +28,7 @@ int semicolon(char *line, int loop, char **argv)
 		if (line[cont] == ';' && line[cont + 1] == ';')
 		{
 			valid = 1;
-			write(STDERR_FILENO, argv[0], _strlen(argv[0]));
+			write(STDERR_FILENO, argv[0], strlen(argv[0]));
 			write(STDERR_FILENO, ": ", 2);
 			print_number(loop);
 			write(STDERR_FILENO, ": ", 2);
@@ -42,11 +42,11 @@ int semicolon(char *line, int loop, char **argv)
 	return (valid);
 }
 /**
- *_comments - remove commentaries
+ *comments - remove commentaries
  *@line: input of user
  * Return: the new input
  */
-char *_comments(char *line)
+char *comments(char *line)
 {
 	int a = 0, c = 0, flag = 0;
 
