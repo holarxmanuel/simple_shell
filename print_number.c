@@ -1,8 +1,8 @@
 #include "shell.h"
+
 /**
- * print_number - prits all natural numbers
- * @n: parametr to print
- * Return: Alwys 0
+ * print_number - prints an integer
+ * @n: The integer to be printed
  */
 void print_number(int n)
 {
@@ -27,3 +27,4 @@ void print_number(int n)
 		write(STDERR_FILENO, &a, 1);
 	}
 }
+

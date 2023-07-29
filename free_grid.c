@@ -1,17 +1,23 @@
 #include "shell.h"
+
 /**
- * free_grid - fe a matrix
- * @grid: it s the matrix
- * @height: hight of the matrix
+ * free_grid - free a matrix
+ * @grid: the matrix to be freed
+ * @height: height of the matrix
  * Return: nothing
  */
 void free_grid(char **grid, int height)
 {
-	int i;
+    int i;
 
-	for (i = 0; i < height; i++)
-	{
-		free(grid[i]);
-	}
-	free(grid);
+    if (grid == NULL)
+        return;
+
+    for (i = 0; i < height; i++)
+    {
+        if (grid[i] != NULL)
+            free(grid[i]);
+    }
+    free(grid);
 }
+

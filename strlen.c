@@ -1,9 +1,9 @@
 #include "shell.h"
 
 /**
- * _strlen - returns the length of a string.
- * @s: string
- * Return: Always 0.
+ * _strlen - returnslength of a string.
+ * @s: strig
+ * Return: Aays 0.
  */
 int _strlen(char *s)
 {

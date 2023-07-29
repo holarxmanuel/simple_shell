@@ -1,9 +1,10 @@
 #include "shell.h"
+
 /**
- * Counter - cous the number of lim found in the input
- * @L: the inputtring;
- * @lim: charactr to find inside the L string
- * Return: numbeof characters found
+ * Counter - counts the number of lim found in the input
+ * @L: the input string;
+ * @lim: character to find inside the L string
+ * Return: number of characters found
  */
 int Counter(char *L, char *lim)
 {
@@ -25,10 +26,11 @@ int Counter(char *L, char *lim)
 	}
 	return (num);
 }
+
 /**
- * parsing - crean array of pointers depending of the delimit characters
- * @line: input  the user
- * Return: an arf pointers of n size
+ * parsing - create an array of pointers depending on the delimit characters
+ * @line: input of the user
+ * Return: an array of pointers of n size
  */
 char **parsing(char *line)
 {
@@ -38,36 +40,43 @@ char **parsing(char *line)
 	if (line == NULL)
 		return (NULL);
 	buffsize = Counter(line, " \t");
-	p = calloc((buffsize + 1), sizeof(char *));
+	p = _calloc((buffsize + 1), sizeof(char *));
 	if (!p)
 	{
 		perror("No memory");
 		return (NULL);
 	}
-	token = strtoky(line, " \t\n");
+
+	/* Store the token partition inside **p */
+	token = _strtoky(line, " \t\n");
 	if (!token)
 	{
 		free(p);
 		return (NULL);
 	}
+
 	while (token)
 	{
 		while (token[length] != '\0')
 			length++;
-		p[j] = calloc((length + 1), sizeof(char));
+		p[j] = _calloc((length + 1), sizeof(char));
 		if (p[j] == NULL)
 		{
 			free_grid(p, j);
 			perror("No memory");
 			return (NULL);
 		}
+
+		/* Fill the pointer with the content of token */
 		for (i = 0; i < length; i++)
 			p[j][i] = token[i];
 		length = 0;
 		j++;
-/*get the next eleme*/
-		token = strtoky(NULL, " \t\n");
+		
+		/* Get the next element */
+		token = _strtoky(NULL, " \t\n");
 	}
 	p[j] = NULL;
 	return (p);
 }
+

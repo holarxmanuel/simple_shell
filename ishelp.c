@@ -1,13 +1,6 @@
 #include "shell.h"
-/**
- * ishelp - if args[0] is elp builtin
- * @p: input pointe
- * @loop: counter ofloops
- * @v: arguments in nput
- * @m: copy of envirnment variables
- * Return: 0 if helpxist or -1 if not.
- */
-int ishelp(char **p, int loop, char *v[], char **m)
+
+int _ishelp(char **p, int loop, char *v[], char **m)
 {
 	char str[] = "help";
 	int i = 0, cont = 0, salida = -1;
@@ -26,20 +19,13 @@ int ishelp(char **p, int loop, char *v[], char **m)
 
 	if (cont == 5)
 	{
-		help(p, loop, v, m);
+		_help(p, loop, v, m);
 		salida = 0;
 	}
 	return (salida);
 }
-/**
- * help_builtin -  help of builtin
- * @p: input poiner
- * @loop: counterof loops
- * @v: arguments n input
- * @m: copy of enironment variables
- * Return: nothin.
- */
-void help_builtin(char **p, int loop, char *v[], char **m)
+
+void _help_builtin(char **p, int loop, char *v[], char **m)
 {
 	char str1[3] = "cd", str2[5] = "exit", str3[5] = "help";
 	int i = 0, j = 0, cont = 0, cont2 = 0, k = 1;
@@ -56,39 +42,32 @@ void help_builtin(char **p, int loop, char *v[], char **m)
 				if (p[k][i] == str1[i])
 					cont++;
 			if (cont == 2)
-				read_cdhelp(m);
+				read_cd_help(m);
 			else
-				put_err(p, loop, 1, v);
+				_put_err(p, loop, 1, v);
 		}
 		else if (j == 4)
 		{
-			for (i = 0 ; i < 4; i++)
+			for (i = 0; i < 4; i++)
 				if (p[k][i] == str2[i])
 					cont++;
 			if (cont == 4)
-				read_exithelp(m);
-			for (i = 0 ; i < 4; i++)
+				read_exit_help(m);
+			for (i = 0; i < 4; i++)
 				if (p[k][i] == str3[i])
 					cont2++;
 			if (cont2 == 4)
-				read_helphelp(m);
+				read_help_help(m);
 			else if (cont != 4 && cont2 != 4)
-				put_err(p, loop, 1, v);
+				_put_err(p, loop, 1, v);
 		}
 		else
-			put_err(p, loop, 1, v);
+			_put_err(p, loop, 1, v);
 		k++;
 	}
 }
-/**
-* help - writesthe error
-* @p: input poiter
-* @loop: counte of loops
-* @v: argumentsin input
-* @m: copy of evironment variables
-* Return: nothin
-*/
-void help(char **p, int loop, char *v[], char **m)
+
+void _help(char **p, int loop, char *v[], char **m)
 {
 	if (p[0] != NULL && p[1] == NULL)
 	{
@@ -96,6 +75,7 @@ void help(char **p, int loop, char *v[], char **m)
 	}
 	else
 	{
-		help_builtin(p, loop, v, m);
+		_help_builtin(p, loop, v, m);
 	}
 }
+

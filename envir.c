@@ -1,11 +1,11 @@
 #include "shell.h"
 /**
- * isenv - findsf line input is env
- * @p: input of ser, array of pointers
- * @myenv: copy f environmental variables
- * Return: -1 iffails or 0 if success
+ * _isenv - finds ne input is env
+ * @p: input of us array of pointers
+ * @myenv: copy ofironmental variables
+ * Return: -1 if fs or 0 if success
  */
-int isenv(char **p, char **myenv)
+int _isenv(char **p, char **myenv)
 {
 	char str[4] = "env";
 	int i = 0, j = 0, cont = 0;
@@ -22,16 +22,16 @@ int isenv(char **p, char **myenv)
 		}
 		if (cont == 3)
 		{
-			env(myenv);
+			_env(myenv);
 			return (0);
 		}
 	}
 	return (-1);
 }
 /**
- * create_env - create a copy of the environmental variables
- * @envp: environment variables
- * Return: array of pointers that stores each element of environ variables
+ * create_env - cre a copy of the environmental variables
+ * @envp: environmes
+ * Return: array ofers that stores each element of environ variables
  */
 char **create_env(char *envp[])
 {
@@ -48,7 +48,7 @@ char **create_env(char *envp[])
 		c = 0;
 		while (envp[j][c] != '\0')
 			c++;
-		myenv[j] = calloc(c + 1, sizeof(char));
+		myenv[j] = _calloc(c + 1, sizeof(char));
 		if (myenv[j] == NULL)
 		{
 			free_grid(myenv, j);
@@ -62,17 +62,17 @@ char **create_env(char *envp[])
 	return (myenv);
 }
 /**
- * env - function to print the environment variables
- * environ points to an array of pointers to strings called the "environment"
- * @myenv: icopy of environmental
+ * _env - funco print the environment variables
+ * environ poian array of pointers to strings called the "environment"
+ * @myenv: ic ronmental
  */
-void env(char **myenv)
+void _env(char **myenv)
 {
 	int i;
 
 	for (i = 0; myenv[i] != NULL; i++)
 	{
-		write(STDOUT_FILENO, myenv[i], strlen(myenv[i]));
+		write(STDOUT_FILENO, myenv[i], _strlen(myenv[i]));
 		write(STDOUT_FILENO, "\n", 1);
 	}
 }

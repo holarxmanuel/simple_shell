@@ -1,0 +1,130 @@
+#include "shell.h"
+
+/**
+ * is_cd_builtin - Finds if the input line is for the "cd" builtin command
+ * @p: Input of the user, array of pointers
+ * @loop: Counter of loop
+ * @v: Arguments in input
+ * @myenv: Copy of environment variables
+ * Return: -1 if not a match, 0 if the input is "cd" command
+ */
+int is_cd_builtin(char **p, int loop, char *v[], char **myenv)
+{
+    char str[] = "cd";
+    int i = 0, cont = 0, value = -1;
+
+    while (p[0][i] != '\0')
+    {
+        if (i < 2)
+        {
+            if (p[0][i] == str[i])
+                cont++;
+        }
+        i++;
+    }
+
+    if (i == 2)
+        cont++;
+
+    if (cont == 3)
+    {
+        cd_builtin(p, loop, v, myenv);
+        value = 0;
+    }
+    else if (cont == 2)
+    {
+        print_error(p, loop, 3, v);
+        value = 0;
+    }
+
+    return (value);
+}
+
+/**
+ * clean_cd_buffer - Cleans the buffer
+ * @c: Pointer to buffer
+ */
+void clean_cd_buffer(char *c)
+{
+    int i;
+
+    for (i = 0; i < 2048; i++)
+        c[i] = 0;
+}
+
+/**
+ * fill_cd_buffer - Fills the buffer
+ * @f: Pointer to buffer
+ * @aux: Pointer to aux
+ */
+void fill_cd_buffer(char *f, char *aux)
+{
+    int w;
+
+    for (w = 0; aux[w] != '\0'; w++)
+        f[w] = aux[w];
+
+    for (; w < 2048; w++)
+        f[w] = 0;
+}
+
+/**
+ * cd_builtin - Changes the current directory of the process.
+ * @a: Input of the user, array of pointers
+ * @loop: Loops counter
+ * @v: Arguments in input
+ * @myenv: Copy of environment variables
+ */
+void cd_builtin(char **a, int loop, char *v[], char **myenv)
+{
+    int value = 0, z = 0;
+    static char buf[2048];
+    static int w = 1;
+    char *home, aux[2048] = {0};
+
+    currentstatus(&z);
+
+    if (w == 1)
+    {
+        home = get_home_directory(myenv);
+
+        if (!home)
+            getcwd(home, 2048);
+
+        update_old_pwd(getcwd(buf, 2048), myenv);
+        fill_cd_buffer(buf, get_home_directory(myenv));
+        w++;
+    }
+
+    if (a[1] == NULL)
+    {
+        clean_cd_buffer(buf);
+        getcwd(buf, 2048);
+        update_old_pwd(buf, myenv);
+        value = chdir((const char *)get_home_directory(myenv));
+        update_pwd(get_home_directory(myenv), myenv);
+    }
+    else if (a[1][0] == '-' && a[1][1] == '\0')
+    {
+        clean_cd_buffer(aux);
+        getcwd(aux, 2048);
+        update_old_pwd(aux, myenv);
+        write(STDOUT_FILENO, buf, 2048);
+        write(STDOUT_FILENO, "\n", 1);
+        value = chdir((const char *)buf);
+        update_pwd(buf, myenv);
+        fill_cd_buffer(buf, aux);
+    }
+    else
+    {
+        clean_cd_buffer(buf);
+        getcwd(buf, 2048);
+        update_old_pwd(buf, myenv);
+        value = chdir((const char *)a[1]);
+        update_pwd(a[1], myenv);
+    }
+
+    if (value == -1)
+        print_error(a, loop, 1, v);
+}
+

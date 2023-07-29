@@ -1,0 +1,110 @@
+#include "shell.h"
+
+static int pr = 1;
+
+/**
+ * _put_err - writes the error
+ * @p: input pointer
+ * @loop: counter of loops
+ * @sig: signal
+ * @v: arguments in input
+ * Return: Nothing.
+ */
+void _put_err(char **p, int loop, int sig, char *v[])
+{
+	if (sig == 0)
+		pr = 0;
+	pr++;
+	if (sig == 3)
+		pr = 3;
+	if (sig == 4)
+		pr = 4;
+	if (sig == 5)
+		pr = 5;
+	if (pr == 2 || (pr == 3 && sig == 3) || (pr == 4 && sig == 4) || (pr == 5 && sig == 5))
+	{
+		write(STDERR_FILENO, v[0], _strlen(v[0]));
+		write(STDERR_FILENO, ": ", 2);
+		print_number(loop);
+		write(STDERR_FILENO, ": ", 2);
+	}
+
+	if (pr == 2)
+		_builtinerr(p);
+	else if (pr == 3 && sig == 3)
+	{
+		_errorgarbage(p);
+		pr = 1;
+	}
+	else if (pr == 4 && sig == 4)
+	{
+		write(STDERR_FILENO, p[0], _strlen(p[0]));
+		write(STDERR_FILENO, ": Permission denied\n", 20);
+	}
+	else if (pr == 5 && sig == 5)
+		_builtinerr2(p);
+}
+
+/**
+ * _builtinerr - writes the error
+ * @p: input pointer
+ * Return: nothing.
+ */
+void _builtinerr(char **p)
+{
+	int i = 0, cont = 0;
+
+	char *builtin_cmds[] = {"cd", "exit", "help"};
+	int num_builtin_cmds = sizeof(builtin_cmds) / sizeof(builtin_cmds[0]);
+
+	while (p[0][i] != '\0')
+		i++;
+
+	for (int j = 0; j < num_builtin_cmds; j++)
+	{
+		if (_strcmp(p[0], builtin_cmds[j]) == 0)
+		{
+			cont++;
+			break;
+		}
+	}
+
+	if (cont > 0)
+	{
+		if (_strcmp(p[0], "cd") == 0)
+			_errorcd(p);
+		else if (_strcmp(p[0], "exit") == 0)
+			_errorexit(p);
+		else if (_strcmp(p[0], "help") == 0)
+			_errorhelp(p);
+	}
+}
+
+/**
+ * _builtinerr2 - writes the error
+ * @p: input pointer
+ * Return: nothing.
+ */
+void _builtinerr2(char **p)
+{
+	int i = 0, cont = 0;
+
+	char *builtin_cmds[] = {"unsetenv", "setenv"};
+	int num_builtin_cmds = sizeof(builtin_cmds) / sizeof(builtin_cmds[0]);
+
+	while (p[0][i] != '\0')
+		i++;
+
+	for (int j = 0; j < num_builtin_cmds; j++)
+	{
+		if (_strcmp(p[0], builtin_cmds[j]) == 0)
+		{
+			cont++;
+			break;
+		}
+	}
+
+	if (cont > 0)
+		_errorenv(p);
+}
+

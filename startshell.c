@@ -1,26 +1,26 @@
 #include "shell.h"
+
 /**
- * main - shell leton
- * @argc: number arguments in the input
- * @argv: argumein the input
- * @envp: environt variables
- * Return: 0 on uccess
+ * main - shell skeleton
+ * @argc: number of arguments in the input
+ * @argv: arguments in the input
+ * @envp: environment variables
+ * Return: 0 on Success
  */
 int main(int argc, char *argv[], char *envp[])
 {
-
 	if (argc == 1)
 	{
-		noargv(argv, envp);
+		_noargv(argv, envp);
 	}
 	else if (argc == 2)
 	{
-		yesargv(argv, envp);
+		_yesargv(argv, envp);
 	}
 	else
 	{
-		write(STDIN_FILENO, "NO ADMITTED AMOUNT OF ARGUMENTS", 31);
-		write(STDIN_FILENO, "\n", 1);
+		write(STDOUT_FILENO, "NO ADMITTED AMOUNT OF ARGUMENTS\n", 31);
 	}
 	return (0);
 }
+

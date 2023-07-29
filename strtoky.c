@@ -1,11 +1,12 @@
 #include "shell.h"
+
 /**
- * _sch - search if a char is inside a string
+ * _search_char - search if a char is inside a string
  * @s: string to review
  * @c: char to find
- * Return: 1 if success 0 if not
+ * Return: 1 if found, 0 if not
  */
-int _sch(char *s, char c)
+int _search_char(char *s, char c)
 {
 	int cont = 0;
 
@@ -22,39 +23,40 @@ int _sch(char *s, char c)
 	else
 		return (0);
 }
+
 /**
- * strtoky - function that cut a string into tokens depending of the delimit
- * @s: stringto cut in parts
- * @d: delimiers
+ * _strtoky - function that cuts a string into tokens depending on the delimiters
+ * @s: string to cut in parts
+ * @d: delimiters
  * Return: first partition
  */
-char *strtoky(char *s, char *d)
+char *_strtoky(char *s, char *d)
 {
-	static char *ultimo;
+	static char *last;
 	int i = 0, j = 0;
 
 	if (!s)
-		s = ultimo;
+		s = last;
 	while (s[i] != '\0')
 	{
-		if (_sch(d, s[i]) == 0 && s[i + 1] == '\0')
+		if (!_search_char(d, s[i]) && s[i + 1] == '\0')
 		{
-			ultimo = s + i + 1;
-			*ultimo = '\0';
+			last = s + i + 1;
+			*last = '\0';
 			s = s + j;
 			return (s);
 		}
-		else if (_sch(d, s[i]) == 0 && _sch(d, s[i + 1]) == 0)
+		else if (!_search_char(d, s[i]) && !_search_char(d, s[i + 1]))
 			i++;
-		else if (_sch(d, s[i]) == 0 && _sch(d, s[i + 1]) == 1)
+		else if (!_search_char(d, s[i]) && _search_char(d, s[i + 1]))
 		{
-			ultimo = s + i + 1;
-			*ultimo = '\0';
-			ultimo++;
+			last = s + i + 1;
+			*last = '\0';
+			last++;
 			s = s + j;
 			return (s);
 		}
-		else if (_sch(d, s[i]) == 1)
+		else if (_search_char(d, s[i]))
 		{
 			j++;
 			i++;
@@ -62,34 +64,35 @@ char *strtoky(char *s, char *d)
 	}
 	return (NULL);
 }
+
 /**
-* strtoky2 - function tokenizaition with ;
-* @s: string to cut in parts
-* @d: delimitersi
-* Return: first patition
-*/
-char *strtoky2(char *s, char *d)
+ * _strtoky2 - function tokenization with ;
+ * @s: string to cut in parts
+ * @d: delimiters
+ * Return: first partition
+ */
+char *_strtoky2(char *s, char *d)
 {
-	static char *ultimo;
+	static char *last;
 	int i = 0, j = 0;
 
 	if (!s)
-		s = ultimo;
+		s = last;
 	while (s[i] != '\0')
 	{
-		if (_sch(d, s[i]) == 0 && s[i + 1] == '\0')
+		if (!_search_char(d, s[i]) && s[i + 1] == '\0')
 			i++;
-		else if (_sch(d, s[i]) == 0 && _sch(d, s[i + 1]) == 0)
+		else if (!_search_char(d, s[i]) && !_search_char(d, s[i + 1]))
 			i++;
-		else if (_sch(d, s[i]) == 0 && _sch(d, s[i + 1]) == 1)
+		else if (!_search_char(d, s[i]) && _search_char(d, s[i + 1]))
 		{
-			ultimo = s + i + 1;
-			*ultimo = '\0';
-			ultimo++;
+			last = s + i + 1;
+			*last = '\0';
+			last++;
 			s = s + j;
 			return (s);
 		}
-		else if (_sch(d, s[i]) == 1)
+		else if (_search_char(d, s[i]))
 		{
 			j++;
 			i++;
@@ -97,3 +100,4 @@ char *strtoky2(char *s, char *d)
 	}
 	return (NULL);
 }
+

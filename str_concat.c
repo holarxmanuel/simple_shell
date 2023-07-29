@@ -1,10 +1,10 @@
 #include "shell.h"
 
 /**
- * str_concat - crate an array using malloc
+ * str_concat - create an array using malloc
  * @s1: first array
- * @s2: second arra
- * Return: return a pointer o null
+ * @s2: second array
+ * Return: return a pointer or null
  */
 char *str_concat(char *s1, char *s2)
 {
@@ -12,22 +12,19 @@ char *str_concat(char *s1, char *s2)
 	unsigned int a = 0, b = 0, f, d = 0;
 
 	if (s1 == NULL)
-	{
 		s1 = "";
-	}
+
 	if (s2 == NULL)
-	{
 		s2 = "";
-	}
-	while (*(s1 + a) != '\0')
-	{
+
+	while (s1[a] != '\0')
 		a++;
-	}
-	while (s2[b])
-	{
+
+	while (s2[b] != '\0')
 		b++;
-	}
-	p = calloc(a + b + 1, sizeof(char));
+
+	p = _calloc(a + b + 1, sizeof(char));
+
 	if (!p)
 	{
 		return (NULL);
@@ -35,13 +32,13 @@ char *str_concat(char *s1, char *s2)
 	else
 	{
 		for (f = 0; f < a; f++)
-		{
 			p[f] = s1[f];
-		}
-		for (f = a; f <= (a + b); f++, d++)
-		{
+
+		for (f = a; f < (a + b); f++, d++)
 			p[f] = s2[d];
-		}
+
+		p[f] = '\0';
 		return (p);
 	}
 }
+

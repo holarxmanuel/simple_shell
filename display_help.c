@@ -1,9 +1,9 @@
 #include "shell.h"
 
 /**
- * read_help - reads builtins text file and prints it to POSIX stdout
- * @m: copy of environment variables
- * Return: number of letters to write, otherwise 0.
+ * read_help - reads all text file and prints it to POSIX stdout
+ * @m: copy of environmenbles
+ * Return: number of lettwrite, otherwise 0.
  */
 
 ssize_t read_help(char **m)
@@ -17,7 +17,7 @@ ssize_t read_help(char **m)
 	buf = malloc((sizeof(char) * letters + 1));
 	if (buf == NULL)
 		return (0);
-	home = gethome(m);
+	home = _gethome(m);
 	helpdir = str_concat(home, helpfiles);
 	fd = open(helpdir, O_RDONLY);
 	if (fd == -1)
@@ -47,9 +47,9 @@ ssize_t read_help(char **m)
 }
 
 /**
- * read_cdhelp - reads cd text file and prints it to POSIX stdout
- * @m: copy of environment variables
- * Return: number of letters to write, otherwise 0.
+ * read_cdhelp - reads cdfile and prints it to POSIX stdout
+ * @m: copy of environmenriables
+ * Return: number of lettto write, otherwise 0.
  */
 
 ssize_t read_cdhelp(char **m)
@@ -63,7 +63,7 @@ ssize_t read_cdhelp(char **m)
 	buf = malloc((sizeof(char) * letters + 1));
 	if (buf == NULL)
 		return (0);
-	home = gethome(m);
+	home = _gethome(m);
 	helpdir = str_concat(home, helpfiles);
 	fd = open(helpdir, O_RDONLY);
 	if (fd == -1)
@@ -93,9 +93,9 @@ ssize_t read_cdhelp(char **m)
 }
 
 /**
- * read_exithelp - reads exit text file and prints it to POSIX stdout
- * @m: copy of environment variables
- * Return: number of letters to write, otherwise 0.
+ * read_exithelp - reads text file and prints it to POSIX stdout
+ * @m: copy of environmenariables
+ * Return: number of lettto write, otherwise 0.
  */
 
 ssize_t read_exithelp(char **m)
@@ -109,7 +109,7 @@ ssize_t read_exithelp(char **m)
 	buf = malloc((sizeof(char) * letters + 1));
 	if (buf == NULL)
 		return (0);
-	home = gethome(m);
+	home = _gethome(m);
 	helpdir = str_concat(home, helpfiles);
 	fd = open(helpdir, O_RDONLY);
 	if (fd == -1)
@@ -139,9 +139,9 @@ ssize_t read_exithelp(char **m)
 }
 
 /**
- * read_helphelp - reads help text file and prints it to POSIX stdout
- * @m: copy of environment variables
- * Return: number of letters to write, otherwise 0.
+ * read_helphelp - reads text file and prints it to POSIX stdout
+ * @m: copy ofvironment variables
+ * Return: numr of letters to write, otherwise 0.
  */
 
 ssize_t read_helphelp(char **m)
@@ -155,7 +155,7 @@ ssize_t read_helphelp(char **m)
 	buf = malloc((sizeof(char) * letters + 1));
 	if (buf == NULL)
 		return (0);
-	home = gethome(m);
+	home = _gethome(m);
 	helpdir = str_concat(home, helpfiles);
 	fd = open(helpdir, O_RDONLY);
 	if (fd == -1)

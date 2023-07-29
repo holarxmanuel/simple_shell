@@ -1,14 +1,14 @@
 #include "shell.h"
 
 /**
- * verifypath - check if the path has a : at the begining
- * or if exi
- *@path: string insidATH env varible
- *@pwd: string inside env variable
- *Return: path, or pw concatenated to path if there is a : at the begining or
- *pwd concatenated whn there is ::
+ * _verifypath - check if the path has a : at the beginning
+ * or if exist ::
+ *@path: string inside PATH environment variable
+ *@pwd: string inside PWD environment variable
+ *Return: path, or pwd concatenated to path if there is a : at the beginning or
+ *pwd concatenated when there is ::
  */
-char *verifypath(char *path, char *pwd)
+char *_verifypath(char *path, char *pwd)
 {
 	int a = 0, c = 0, i = 0;
 	char *newpath = NULL;
@@ -19,7 +19,7 @@ char *verifypath(char *path, char *pwd)
 	{
 		if (path[0] == ':')
 		{
-			newpath = calloc(c + 1, sizeof(char));
+			newpath = _calloc(c + 1, sizeof(char));
 			newpath[0] = pwd[0];
 			for (i = 0; path[i] != '\0'; i++)
 				newpath[i + 1] = path[i];
@@ -30,7 +30,7 @@ char *verifypath(char *path, char *pwd)
 		}
 		else if (path[a] == ':' && path[a + 1] == ':')
 		{
-			newpath = calloc(c + 1, sizeof(char));
+			newpath = _calloc(c + 1, sizeof(char));
 			for (i = 0; i <= a; i++)
 				newpath[i] = path[i];
 			newpath[i] = pwd[0];
@@ -44,12 +44,13 @@ char *verifypath(char *path, char *pwd)
 	}
 	return (path);
 }
+
 /**
- * getpath - get he string in PATH env
- * @m: environmenariables
- * Return: stringinside PATH env variable
+ *_getpath - get the string in PATH environment variable
+ * @m: environment variables
+ * Return: string inside PATH environment variable
  */
-char *getpath(char **m)
+char *_getpath(char **m)
 {
 	int i, j, k = 0, w = 0, cont = 0;
 	char str[] = "PATH=";
@@ -79,7 +80,7 @@ char *getpath(char **m)
 		}
 		if (w == 0)
 			return (NULL);
-		path = calloc(w + 1, sizeof(char));
+		path = _calloc(w + 1, sizeof(char));
 		if (path == NULL)
 			return (NULL);
 		k = 5;
@@ -92,13 +93,13 @@ char *getpath(char **m)
 	}
 	return (NULL);
 }
+
 /**
- * checkbin - cheks if arg[0] has /bin/
- * @b: inputof user, array of pointers
- * @m: copy f environment variables
+ * checkbin - checks if arg[0] has /bin/
+ * @b: input of user, array of pointers
+ * @m: copy of environment variables
  * Return: 0.
  */
-
 char **checkbin(char **b, char **m)
 {
 	unsigned int i = 0, j = 0, k = 0;
@@ -106,21 +107,21 @@ char **checkbin(char **b, char **m)
 	char *path, *tokens, *buf, *newpath;
 	char *valor;
 
-	i = strlen(b[0]);
+	i = _strlen(b[0]);
 	if (b == NULL || i == 0)
 		return (NULL);
-	path = getpath(m);
+	path = _getpath(m);
 	if (path == NULL)
 		return (b);
-	newpath = verifypath(path, ".");
-	tokens = strtoky(newpath, ":");
+	newpath = _verifypath(path, ".");
+	tokens = _strtoky(newpath, ":");
 	if (!tokens)
 		return (NULL);
 	while (tokens != NULL)
 	{
 		while (tokens[j] != '\0')
 			j++;
-		buf = calloc((j + 2), sizeof(char));
+		buf = _calloc((j + 2), sizeof(char));
 		if (buf == NULL)
 			perror("No memory");
 		for (k = 0; k < j; k++)
@@ -129,15 +130,16 @@ char **checkbin(char **b, char **m)
 		valor = str_concat(buf, b[0]);
 		if (stat(valor, &veri) == 0)
 		{
-			b[0] = realloc2(buf, b[0], i, strlen(valor));
+			b[0] = _realloc2(buf, b[0], i, _strlen(valor));
 			free(buf), free(valor);
 			free(newpath);
 			return (b);
 		}
-		tokens = strtoky(NULL, ":");
+		tokens = _strtoky(NULL, ":");
 		j = 0;
 		free(buf), free(valor);
 	}
 	free(newpath);
 	return (b);
 }
+
